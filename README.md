@@ -32,11 +32,12 @@ Agregue la dependencia a su proyecto Maven:
 ### 1. Configuración
 
 ```java
-import org.example.notification.*;
-import org.example.notification.config.NotificationConfig;
-import org.example.notification.email.providers.SendGridProvider;
-import org.example.notification.slack.providers.SlackWebhookProvider;
-import org.example.notification.sms.providers.TwilioProvider;
+import com.agora.challenge.notification.NotificationManager;
+import com.agora.challenge.notification.TypeChannel;
+import config.notification.com.agora.challenge.NotificationConfig;
+import providers.email.notification.com.agora.challenge.SendGridProvider;
+import providers.slack.notification.com.agora.challenge.SlackWebhookProvider;
+import providers.sms.notification.com.agora.challenge.TwilioProvider;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,28 +46,52 @@ import java.util.Map;
 NotificationConfig config = new NotificationConfig();
 
 // Registrar proveedores
-config.registerProvider(NotificationChannel.EMAIL, SendGridProvider.class);
-config.registerProvider(NotificationChannel.SLACK, SlackWebhookProvider.class);
-config.registerProvider(NotificationChannel.SMS, TwilioProvider.class);
+config.
 
-// Configurar cada canal
-Map<String, Object> emailConfig = new HashMap<>();
-emailConfig.put("apiKey", "your-sendgrid-api-key");
-emailConfig.put("fromEmail", "notifications@yourdomain.com");
-config.configureChannel(NotificationChannel.EMAIL, emailConfig);
+        registerProvider(TypeChannel.EMAIL, SendGridProvider .class);
+config.
 
-Map<String, Object> slackConfig = new HashMap<>();
-slackConfig.put("webhookUrl", "https://hooks.slack.com/services/your/webhook");
-config.configureChannel(NotificationChannel.SLACK, slackConfig);
+        registerProvider(TypeChannel.SLACK, SlackWebhookProvider .class);
+config.
 
-Map<String, Object> smsConfig = new HashMap<>();
-smsConfig.put("accountSid", "your-twilio-account-sid");
-smsConfig.put("authToken", "your-twilio-auth-token");
-smsConfig.put("fromNumber", "+1234567890");
-config.configureChannel(NotificationChannel.SMS, smsConfig);
+        registerProvider(TypeChannel.SMS, TwilioProvider .class);
 
-// Crear el manager
-NotificationManager notificationManager = new NotificationManager(config);
+        // Configurar cada canal
+        Map<String, Object> emailConfig = new HashMap<>();
+emailConfig.
+
+        put("apiKey","your-sendgrid-api-key");
+emailConfig.
+
+        put("fromEmail","notifications@yourdomain.com");
+config.
+
+        configureChannel(TypeChannel.EMAIL, emailConfig);
+
+        Map<String, Object> slackConfig = new HashMap<>();
+slackConfig.
+
+        put("webhookUrl","https://hooks.slack.com/services/your/webhook");
+config.
+
+        configureChannel(TypeChannel.SLACK, slackConfig);
+
+        Map<String, Object> smsConfig = new HashMap<>();
+smsConfig.
+
+        put("accountSid","your-twilio-account-sid");
+smsConfig.
+
+        put("authToken","your-twilio-auth-token");
+smsConfig.
+
+        put("fromNumber","+1234567890");
+config.
+
+        configureChannel(TypeChannel.SMS, smsConfig);
+
+        // Crear el manager
+        NotificationManager notificationManager = new NotificationManager(config);
 ```
 
 ### 2. Enviar Notificaciones
@@ -98,7 +123,7 @@ Para agregar un nuevo proveedor de email (por ejemplo, Amazon SES):
 ```java
 package org.example.notification.email.providers;
 
-import org.example.notification.email.EmailProvider;
+import email.notification.com.agora.challenge.EmailProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -145,7 +170,7 @@ public class AmazonSESProvider implements EmailProvider {
 
 ```java
 // Registrar el nuevo proveedor
-config.registerProvider(NotificationChannel.EMAIL, AmazonSESProvider.class);
+config.registerProvider(TypeChannel.EMAIL, AmazonSESProvider.class);
 
 // Configurar el proveedor
 Map<String, Object> amazonSESConfig = new HashMap<>();
@@ -153,7 +178,7 @@ amazonSESConfig.put("accessKey", "your-access-key");
 amazonSESConfig.put("secretKey", "your-secret-key");
 amazonSESConfig.put("region", "us-east-1");
 amazonSESConfig.put("fromEmail", "notifications@yourdomain.com");
-config.configureChannel(NotificationChannel.EMAIL, amazonSESConfig);
+config.configureChannel(TypeChannel.EMAIL, amazonSESConfig);
 ```
 
 ### 3. Crear un Nuevo Canal
@@ -164,7 +189,9 @@ Para agregar un nuevo canal (por ejemplo, Push Notifications):
 // 1. Crear la interfaz del proveedor
 package org.example.notification.push;
 
-import org.example.notification.NotificationProvider;
+import com.agora.challenge.notification.Channel;
+import com.agora.challenge.notification.NotificationProvider;
+import notification.com.agora.challenge.TypeChannel;
 
 public interface PushProvider extends NotificationProvider {
 }
@@ -172,12 +199,12 @@ public interface PushProvider extends NotificationProvider {
 // 2. Crear la implementación del canal
 package org.example.notification.push;
 
-import org.example.notification.Notification;
-import org.example.notification.NotificationChannel;
+import notification.com.agora.challenge.Channel;
+import notification.com.agora.challenge.TypeChannel;
 
 import java.util.Map;
 
-public class PushNotification implements Notification {
+public class PushNotification implements Channel {
     private final PushProvider provider;
 
     public PushNotification(PushProvider provider) {
@@ -194,14 +221,14 @@ public class PushNotification implements Notification {
 
     @Override
     public String getChannelType() {
-        return NotificationChannel.PUSH.getChannelName();
+        return TypeChannel.PUSH.getChannelName();
     }
 }
 
 // 3. Crear un proveedor concreto (ej: Firebase)
 package org.example.notification.push.providers;
 
-import org.example.notification.push.PushProvider;
+import push.notification.com.agora.challenge.PushProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -25,8 +25,8 @@ WORKDIR /app
 COPY --from=builder /app/target/notification-library-1.0.0.jar /app/notification-demo.jar
 
 # Copiar scripts de ejemplo
-COPY src/main/java/org/example/Main.java /app/Main.java
-COPY src/main/java/org/example/notification/ /app/notification/
+COPY src/main/java/com/agora/challenge/Main.java /app/Main.java
+COPY src/main/java/com/agora/challenge/notification/ /app/notification/
 
 # Crear script de entrada para ejecutar demos
 RUN echo '#!/bin/bash\n\
@@ -35,7 +35,7 @@ RUN echo '#!/bin/bash\n\
 echo "Compilando ejemplo..."\n\
 javac -cp "notification-demo.jar:." Main.java\n\
 echo "Ejecutando demo de notificaciones..."\n\
-java -cp "notification-demo.jar:." org.example.Main\n\
+java -cp "notification-demo.jar:." com.agora.challenge.Main\n\
 \n\
 # Mantener el contenedor vivo para exploración\n\
 echo "Demo completada. Contenedor permanecerá activo para exploración."\n\
