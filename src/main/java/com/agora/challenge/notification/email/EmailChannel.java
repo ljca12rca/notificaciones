@@ -8,10 +8,10 @@ import java.util.Map;
 /**
  * Implementación concreta de notificación por email
  */
-public class EmailNotification implements Channel {
+public class EmailChannel implements Channel {
     private final EmailProvider provider;
 
-    public EmailNotification(EmailProvider provider) {
+    public EmailChannel(EmailProvider provider) {
         this.provider = provider;
     }
 
