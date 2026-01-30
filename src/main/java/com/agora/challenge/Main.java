@@ -2,7 +2,7 @@ package com.agora.challenge;
 
 import com.agora.challenge.notification.NotificationManager;
 import com.agora.challenge.notification.TypeChannel;
-import com.agora.challenge.notification.config.NotificationConfig;
+import com.agora.challenge.notification.config.ChannelConfig;
 import com.agora.challenge.notification.email.providers.MailgunProvider;
 import com.agora.challenge.notification.email.providers.SendGridProvider;
 import com.agora.challenge.notification.push.providers.FirebaseProvider;
@@ -17,7 +17,7 @@ public class Main {
         System.out.println("=== Demo: Librería de Notificaciones ===");
 
         // 1. Configurar la librería
-        NotificationConfig config = new NotificationConfig();
+        ChannelConfig config = new ChannelConfig();
 
         // Registrar proveedores
         config.registerProvider(TypeChannel.EMAIL, SendGridProvider.class);

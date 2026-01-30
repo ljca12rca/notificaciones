@@ -1,6 +1,6 @@
 package com.agora.challenge.notification;
 
-import com.agora.challenge.notification.config.NotificationConfig;
+import com.agora.challenge.notification.config.ChannelConfig;
 import com.agora.challenge.notification.factory.NotificationFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +15,10 @@ import java.util.Map;
 public class NotificationManager {
     private static final Logger logger = LoggerFactory.getLogger(NotificationManager.class);
 
-    private final NotificationConfig config;
+    private final ChannelConfig config;
     private final Map<String, Channel> notificationCache;
 
-    public NotificationManager(NotificationConfig config) {
+    public NotificationManager(ChannelConfig config) {
         this.config = config;
         this.notificationCache = new HashMap<>();
     }

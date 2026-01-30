@@ -204,10 +204,10 @@ import notification.com.agora.challenge.TypeChannel;
 
 import java.util.Map;
 
-public class PushNotification implements Channel {
+public class PushChannel implements Channel {
     private final PushProvider provider;
 
-    public PushNotification(PushProvider provider) {
+    public PushChannel(PushProvider provider) {
         this.provider = provider;
     }
 

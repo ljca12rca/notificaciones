@@ -8,10 +8,10 @@ import java.util.Map;
 /**
  * Implementación concreta de notificación por Push
  */
-public class PushNotification implements Channel {
+public class PushChannel implements Channel {
     private final PushProvider provider;
 
-    public PushNotification(PushProvider provider) {
+    public PushChannel(PushProvider provider) {
         this.provider = provider;
     }
 

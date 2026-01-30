@@ -1,11 +1,11 @@
 package com.agora.challenge.notification.factory;
 
 import com.agora.challenge.notification.Channel;
-import com.agora.challenge.notification.email.EmailNotification;
+import com.agora.challenge.notification.email.EmailChannel;
 import com.agora.challenge.notification.email.providers.SendGridProvider;
-import com.agora.challenge.notification.slack.SlackNotification;
+import com.agora.challenge.notification.slack.SlackChannel;
 import com.agora.challenge.notification.slack.providers.SlackWebhookProvider;
-import com.agora.challenge.notification.sms.SmsNotification;
+import com.agora.challenge.notification.sms.SmsChannel;
 import com.agora.challenge.notification.sms.providers.TwilioProvider;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +30,7 @@ class NotificationFactoryTest {
     private TwilioProvider mockTwilioProvider;
 
     @Test
-    void testCreateEmailNotification() {
+    void testCreateEmailChannel() {
         Map<String, Object> config = new HashMap<>();
         config.put("apiKey", "test-api-key");
         config.put("fromEmail", "test@example.com");
@@ -41,12 +41,12 @@ class NotificationFactoryTest {
                 config
         );
 
-        assertInstanceOf(EmailNotification.class, channel);
+        assertInstanceOf(EmailChannel.class, channel);
         assertEquals("email", channel.getChannelType());
     }
 
     @Test
-    void testCreateSlackNotification() {
+    void testCreateSlackChannel() {
         Map<String, Object> config = new HashMap<>();
         config.put("webhookUrl", "https://hooks.slack.com/services/test");
 
@@ -56,12 +56,12 @@ class NotificationFactoryTest {
                 config
         );
 
-        assertInstanceOf(SlackNotification.class, channel);
+        assertInstanceOf(SlackChannel.class, channel);
         assertEquals("slack", channel.getChannelType());
     }
 
     @Test
-    void testCreateSmsNotification() {
+    void testCreateSmsChannel() {
         Map<String, Object> config = new HashMap<>();
         config.put("accountSid", "test-sid");
         config.put("authToken", "test-token");
@@ -73,7 +73,7 @@ class NotificationFactoryTest {
                 config
         );
 
-        assertInstanceOf(SmsNotification.class, channel);
+        assertInstanceOf(SmsChannel.class, channel);
         assertEquals("sms", channel.getChannelType());
     }
 

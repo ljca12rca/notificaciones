@@ -1,6 +1,6 @@
 package com.agora.challenge.notification;
 
-import com.agora.challenge.notification.config.NotificationConfig;
+import com.agora.challenge.notification.config.ChannelConfig;
 import com.agora.challenge.notification.email.providers.SendGridProvider;
 import com.agora.challenge.notification.slack.providers.SlackWebhookProvider;
 import com.agora.challenge.notification.sms.providers.TwilioProvider;
@@ -31,7 +31,7 @@ class NotificationManagerTest {
 
     @BeforeEach
     void setUp() {
-        NotificationConfig config = new NotificationConfig();
+        ChannelConfig config = new ChannelConfig();
 
         // Configurar proveedores mock
         config.registerProvider(TypeChannel.EMAIL, SendGridProvider.class);
@@ -58,7 +58,7 @@ class NotificationManagerTest {
     }
 
     @Test
-    void testSendEmailNotification() {
+    void testSendEmailChannel() {
         Map<String, Object> metadata = new HashMap<>();
         metadata.put("to", "recipient@example.com");
         metadata.put("subject", "Test Subject");
@@ -69,7 +69,7 @@ class NotificationManagerTest {
     }
 
     @Test
-    void testSendSlackNotification() {
+    void testSendSlackChannel() {
         Map<String, Object> metadata = new HashMap<>();
         metadata.put("channel", "#general");
 
@@ -79,7 +79,7 @@ class NotificationManagerTest {
     }
 
     @Test
-    void testSendSmsNotification() {
+    void testSendSmsChannel() {
         Map<String, Object> metadata = new HashMap<>();
         metadata.put("phoneNumber", "+1234567890");
 
@@ -98,7 +98,7 @@ class NotificationManagerTest {
     }
 
     @Test
-    void testSendEmailNotificationWithMissingMetadata() {
+    void testSendEmailChannelWithMissingMetadata() {
         Map<String, Object> metadata = new HashMap<>();
         // Falta 'to' y 'subject'
 
