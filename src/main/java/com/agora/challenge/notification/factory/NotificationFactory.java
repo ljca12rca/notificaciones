@@ -3,13 +3,13 @@ package com.agora.challenge.notification.factory;
 import com.agora.challenge.notification.Channel;
 import com.agora.challenge.notification.NotificationProvider;
 import com.agora.challenge.notification.TypeChannel;
-import com.agora.challenge.notification.email.EmailNotification;
+import com.agora.challenge.notification.email.EmailChannel;
 import com.agora.challenge.notification.email.EmailProvider;
-import com.agora.challenge.notification.push.PushNotification;
+import com.agora.challenge.notification.push.PushChannel;
 import com.agora.challenge.notification.push.PushProvider;
-import com.agora.challenge.notification.slack.SlackNotification;
+import com.agora.challenge.notification.slack.SlackChannel;
 import com.agora.challenge.notification.slack.SlackProvider;
-import com.agora.challenge.notification.sms.SmsNotification;
+import com.agora.challenge.notification.sms.SmsChannel;
 import com.agora.challenge.notification.sms.SmsProvider;
 
 import java.util.Map;
@@ -29,10 +29,10 @@ public class NotificationFactory {
         TypeChannel channel = TypeChannel.valueOf(channelType.toUpperCase());
 
         return switch (channel) {
-            case EMAIL -> new EmailNotification((EmailProvider) provider);
-            case SLACK -> new SlackNotification((SlackProvider) provider);
-            case SMS -> new SmsNotification((SmsProvider) provider);
-            case PUSH -> new PushNotification((PushProvider) provider);
+            case EMAIL -> new EmailChannel((EmailProvider) provider);
+            case SLACK -> new SlackChannel((SlackProvider) provider);
+            case SMS -> new SmsChannel((SmsProvider) provider);
+            case PUSH -> new PushChannel((PushProvider) provider);
             default -> throw new IllegalArgumentException("Unsupported channel type: " + channelType);
         };
     }

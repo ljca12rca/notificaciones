@@ -8,10 +8,10 @@ import java.util.Map;
 /**
  * Implementación concreta de notificación por Slack
  */
-public class SlackNotification implements Channel {
+public class SlackChannel implements Channel {
     private final SlackProvider provider;
 
-    public SlackNotification(SlackProvider provider) {
+    public SlackChannel(SlackProvider provider) {
         this.provider = provider;
     }
 

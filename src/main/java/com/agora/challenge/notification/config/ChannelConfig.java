@@ -10,11 +10,11 @@ import java.util.Map;
  * Clase de configuración para notificaciones
  * Permite configuración programática de proveedores y canales
  */
-public class NotificationConfig {
+public class ChannelConfig {
     private final Map<TypeChannel, Class<? extends NotificationProvider>> channelProviders;
     private final Map<TypeChannel, Map<String, Object>> channelConfigurations;
 
-    public NotificationConfig() {
+    public ChannelConfig() {
         this.channelProviders = new HashMap<>();
         this.channelConfigurations = new HashMap<>();
     }

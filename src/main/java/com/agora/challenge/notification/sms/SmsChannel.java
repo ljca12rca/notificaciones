@@ -8,10 +8,10 @@ import java.util.Map;
 /**
  * Implementación concreta de notificación por SMS
  */
-public class SmsNotification implements Channel {
+public class SmsChannel implements Channel {
     private final SmsProvider provider;
 
-    public SmsNotification(SmsProvider provider) {
+    public SmsChannel(SmsProvider provider) {
         this.provider = provider;
     }
 
